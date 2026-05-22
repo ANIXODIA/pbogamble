@@ -60,7 +60,7 @@ if(isset($_GET['user'])) {
 <body>
 
     <center>
-        <h1 style="color: white;">777Mineslots777</h1>
+        <h1 style="color: white;">Mineslots777</h1>
         
         <h3 style="color: yellow;">
             Player: <?php echo $playerName; ?> | Emeralds: <span id="emeralds"><?php echo $startingMoney; ?></span>
