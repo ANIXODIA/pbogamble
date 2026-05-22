@@ -1,27 +1,38 @@
 <?php 
+session_start();
 $conn = mysqli_connect("localhost", "root", "", "my_game_db");
-$result = mysqli_query($conn, "SELECT money FROM users WHERE name = '$_GET[user]'");
-$username = "";
+
+$playerName = "Guest";
+$startingMoney = 100;
+
+// Check if they came from the login screen
 if(isset($_GET['user'])) {
     $username = strtolower($_GET['user']);
-if($username == "") {
-    $playerName = "Guest";
-    $startingMoney = 100;
-} else if(array_key_exists($username, $fake_database)) {
-    $playerName = $_GET['user'];
-    $startingMoney = $fake_database[$username];
-} else {
-    $playerName = "Unknown Player";
-    $startingMoney = 0;
-  }
+    
+    // Check the 'players' table to find their data
+    $result = mysqli_query($conn, "SELECT * FROM players WHERE username = '$username'");
+    
+    if($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $playerName = $row['username'];
+        // Pull their saved money, or give them 1000 if the column is empty
+        if(isset($row['money'])) {
+            $startingMoney = $row['money'];
+        } else {
+            $startingMoney = 1000;
+        }
+    } else {
+        $playerName = "Unknown Player";
+        $startingMoney = 0;
+    }
+}
 ?>
 <html>
 <head>
     <title>My Slot Machine</title>
     <style>
-        /* my styles */
         body {
-            background-color: #8B5A2B; /* dirt color */
+            background-color: #8B5A2B;
             font-family: "Comic Sans MS", Arial, sans-serif;
         }
         #gamebox {
@@ -51,7 +62,6 @@ if($username == "") {
     <center>
         <h1 style="color: white;">Diamond Slots</h1>
         
-        <!-- print out the php variables -->
         <h3 style="color: yellow;">
             Player: <?php echo $playerName; ?> | Emeralds: <span id="emeralds"><?php echo $startingMoney; ?></span>
         </h3>
@@ -111,12 +121,12 @@ if($username == "") {
                 var res2 = symbols[num2];
                 var res3 = symbols[num3];
 
-                // put it on screen
+                
                 document.getElementById("slot1").innerHTML = res1;
                 document.getElementById("slot2").innerHTML = res2;
                 document.getElementById("slot3").innerHTML = res3;
 
-                // check if won
+                //kalau menang//
                 if (res1 == res2 && res2 == res3) {
                     if (res1 == '💎') {
                         var win = bet * 50;
@@ -144,7 +154,7 @@ if($username == "") {
         }
 
         function saveGame() {
-            alert("Score saved to database!");
+            alert("Score saved to database! (You'll need a bit more PHP to actually update the DB here)");
         }
     </script>
 
