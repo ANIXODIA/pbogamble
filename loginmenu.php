@@ -1,38 +1,43 @@
 <?php
-session start():
-require ONCE ('database.php')
+session_start();
+$conn = mysqli_connect("localhost", "root", "", "my_game_db");
+
 if(isset($_POST["loginBtn"])){
     $usr = $_POST["username"];
     $pw = $_POST["password"];
-$sql = "SELECT * FROM players WHERE username = '$usr' AND password = '$pw'";
-$result = mysqli_query($conn, $sql);
-if(mysqli_num_rows($result) > 0){
+    $sql = "SELECT * FROM players WHERE username = '$usr' AND password = '$pw'";
+    $result = mysqli_query($conn, $sql);
+    
+    if(mysqli_num_rows($result) > 0){
         $_SESSION["user"] = $usr;
-        echo "<script>alert('Login Epic Win! Welcome to the server!');</script>";
+        header("Location: loai.php?user=" . urlencode($usr));
+        exit();
     } else {
-        // creeper explosion error message
-        echo "<center><b><font color='red' size='6'>WRONG PASSWORD! YOU DIED!</font></b></center>";
-        }
+        echo "<center><b><font color='red' size='6'>WRONG PASSWORD!</font></b></center>";
+    }
 }
 
 if(isset($_POST["registerBtn"])){ 
     $usr = $_POST["username"];
     $pw = $_POST["password"];
-  $sql2 = "INSERT INTO players (username, password) VALUES ('$usr', '$pw')";
+    // Assuming you have a 'money' column in the players table, we start them with 1000
+    $sql2 = "INSERT INTO players (username, password, money) VALUES ('$usr', '$pw', 1000)";
+    
     if(mysqli_query($conn, $sql2)){
         echo "<center><b><font color='lime' size='6'>ACCOUNT CRAFTED! You can join the server now!</font></b></center>";
     } else {
         echo "<center><b><font color='red' size='6'>SERVER LAG! Could not craft account! (Maybe name is taken?)</font></b></center>";
     }
+} // Fixed the missing closing bracket here!
 ?>
 <html>
-    <head>
+<head>
     <title>777 Mineslots 777</title>
     <style>
         body {
             background-color: #5C4033; 
             color: white;
-            font-family: "Comic Sans MS", cursive, sans-serif; /
+            font-family: "Comic Sans MS", cursive, sans-serif; 
         }
         .stone-box {
             background-color: #808080; 
@@ -77,7 +82,6 @@ if(isset($_POST["registerBtn"])){
                 <u><b>Secret Password:</b></u><br>
                 <input type="password" name="password" style="width: 200px; background-color: #cccccc;"><br><br>
 
-            
                 <input type="submit" name="loginBtn" value=" JOIN SERVER " class="grass-btn">
                 <br>
               
@@ -94,17 +98,4 @@ if(isset($_POST["registerBtn"])){
 </center>
 
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
