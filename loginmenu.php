@@ -10,7 +10,7 @@ if(isset($_POST["loginBtn"])){
     
     if(mysqli_num_rows($result) > 0){
         $_SESSION["user"] = $usr;
-        Send them to the game
+
         header("Location: main.php?user=" . urlencode($usr));
         exit();
     } else {
@@ -23,32 +23,51 @@ if(isset($_POST["loginBtn"])){
     <title>777 Mineslots 777 - Login</title>
     <style>
         body {
-            background-color: #5C4033; 
+            /* Blocky Minecraft Dirt Texture */
+            background-color: #6A4B3A; 
+            background-image: 
+                linear-gradient(45deg, #5C4033 25%, transparent 25%, transparent 75%, #5C4033 75%, #5C4033),
+                linear-gradient(45deg, #5C4033 25%, transparent 25%, transparent 75%, #5C4033 75%, #5C4033);
+            background-size: 64px 64px;
+            background-position: 0 0, 32px 32px;
             color: white;
             font-family: "Comic Sans MS", cursive, sans-serif; 
         }
         .stone-box {
             background-color: #808080; 
-            border: 8px solid #333333;
-            width: 380px;
-            padding: 20px;
+            border: 12px solid #333333; 
+            width: 550px; 
+            padding: 40px; 
+            box-shadow: 10px 10px 0px black; 
         }
         .grass-btn {
             background-color: #4CBB17; 
             color: white;
-            font-size: 22px;
-            border: 4px solid #228B22;
+            font-size: 28px; 
+            border: 6px solid #228B22;
             font-weight: bold;
             cursor: pointer;
+            padding: 10px 20px;
         }
         .wood-btn {
             background-color: #8B5A2B; 
             color: white;
-            font-size: 20px;
-            border: 4px solid #5C4033;
+            font-size: 24px; 
+            border: 6px solid #5C4033;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 15px;
             cursor: pointer;
+            padding: 10px 20px;
+        }
+     
+        input[type="text"], input[type="password"] {
+            width: 300px;
+            height: 40px;
+            font-size: 22px;
+            background-color: #cccccc;
+            border: 4px solid #333;
+            font-family: "Comic Sans MS", cursive, sans-serif; 
+            text-align: center;
         }
     </style>
 </head>
@@ -56,18 +75,18 @@ if(isset($_POST["loginBtn"])){
 
 <center>
     <br><br><br>
-    <h1><font color="#4CBB17">~~~ Welcome to Mineslots777 Server ~~~</font></h1>
-    <h3><font color="cyan">(spend wisely pls)</font></h3>
+    <h1><font color="#4CBB17" size="7">~~~ Welcome to Mineslots777 Server ~~~</font></h1>
+    <h2><font color="cyan"><b>(spend wisely pls)</b></font></h2>
     <br>
 
     <div class="stone-box">
         <center>
             <form action="" method="POST">
-                <u><b>Player Name:</b></u><br>
-                <input type="text" name="username" style="width: 200px; background-color: #cccccc;"><br><br>
+                <u><b><font size="5">Player Name:</font></b></u><br>
+                <input type="text" name="username"><br><br>
 
-                <u><b>Secret Password:</b></u><br>
-                <input type="password" name="password" style="width: 200px; background-color: #cccccc;"><br><br>
+                <u><b><font size="5">Secret Password:</font></b></u><br>
+                <input type="password" name="password"><br><br><br>
 
                 <input type="submit" name="loginBtn" value=" JOIN SERVER " class="grass-btn">
             </form>
@@ -77,9 +96,9 @@ if(isset($_POST["loginBtn"])){
         </center>
     </div>
 
-    <br><br>
-    <marquee width="60%" scrollamount="20" bgcolor="black">
-        <font color="yellow" size="5">SERVER IS ONLINE (Ver 1.0.0) PLS DONATE FOR DIAMOND! </font>
+    <br><br><br>
+    <marquee width="70%" scrollamount="20" bgcolor="black">
+        <font color="yellow" size="6">SERVER IS ONLINE (Ver 1.0.0) PLS DONATE FOR DIAMOND! </font>
     </marquee>
 
 </center>
