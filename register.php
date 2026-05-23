@@ -1,79 +1,89 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "my_game_db"); 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+include 'database.php';
+
+$successMessage = "";
+$errorMessage = "";
 
 if(isset($_POST["registerBtn"])){ 
     $usr = $_POST["username"];
     $pw = $_POST["password"];
     
+    // Hash the password before storing
+    $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
+
+    // Use prepared statement to prevent SQL injection
+    $sql = "INSERT INTO user (username, password, money) VALUES (?, ?, 1000)";
+    $stmt = $connection->prepare($sql); // Prepare the statement
     
-    $sql2 = "INSERT INTO players (username, password, money) VALUES ('$usr', '$pw', 1000)";
-    
-    if(mysqli_query($conn, $sql2)){
-        echo "<center><b><font color='lime' size='6'>ACCOUNT CRAFTED! You can join the server now!</font></b></center>";
+    if (!$stmt) {
+        $errorMessage = "Database error: " . $connection->error;
     } else {
-        echo "<center><b><font color='red' size='6'>SERVER LAG! Could not craft account! (Maybe name is taken?)</font></b></center>";
+        $stmt->bind_param("ss", $usr, $hashedPw); // Bind parameters
+        
+        if($stmt->execute()){
+            $successMessage = "Profile created! You can now log in.";
+        } else {
+            $errorMessage = "Could not create profile: " . $stmt->error;
+        }
     }
 } 
 ?>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Craft Account - Mineslots</title>
-    <style>
-        body {
-            background-color: #5C4033; 
-            color: white;
-            font-family: "Comic Sans MS", cursive, sans-serif; 
-        }
-        .stone-box {
-            background-color: #808080; 
-            border: 8px solid #333333;
-            width: 380px;
-            padding: 20px;
-        }
-        .wood-btn {
-            background-color: #8B5A2B; 
-            color: white;
-            font-size: 20px;
-            border: 4px solid #5C4033;
-            font-weight: bold;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .back-btn {
-            background-color: gray;
-            color: white;
-            font-size: 16px;
-            border: 2px solid black;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-    </style>
+    <title>Register - Educational Slot Simulator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<center>
-    <br><br><br>
-    <h1><font color="yellow">~~~ Craft Your Player Profile ~~~</font></h1>
-    <h3><font color="cyan">(New players get 1000 FREE EMERALDS!)</font></h3>
-    <br>
+<body class="auth-page">
+    <?php include 'dashboard.php'; ?>
 
-    <div class="stone-box">
-        <center>
-            <form action="" method="POST">
-                <u><b>Choose a Name:</b></u><br>
-                <input type="text" name="username" style="width: 200px; background-color: #cccccc;"><br><br>
+    <center>
+        <br><br>
+        <h1 style="color: #ffff99;">Create Your Player Profile</h1>
+        <h2 style="color: cyan;">(New players start with 1000 practice emeralds)</h2>
+        <br>
 
-                <u><b>Create a Password:</b></u><br>
-                <input type="password" name="password" style="width: 200px; background-color: #cccccc;"><br><br>
+        <?php
+        if(!empty($successMessage)) {
+            echo "<div class='success-message'>✓ $successMessage</div>";
+        }
+        if(!empty($errorMessage)) {
+            echo "<div class='error-message'>✗ $errorMessage</div>";
+        }
+        ?>
 
-                <input type="submit" name="registerBtn" value=" CRAFT ACCOUNT " class="wood-btn">
-            </form>
-            
-            <button onclick="window.location.href='loginmenu.php'" class="back-btn"> <-- Go Back to Login</button>
-        </center>
-    </div>
+        <div class="stone-box">
+            <center>
+                <form action="" method="POST">
+                    <u><b style="font-size: 22px;">Choose a Username:</b></u>
+                    <br><br>
+                    <input type="text" name="username" required>
+                    <br><br>
 
-</center>
+                    <u><b style="font-size: 22px;">Create a Password:</b></u>
+                    <br><br>
+                    <input type="password" name="password" required>
+                    <br><br><br>
 
+                    <input type="submit" name="registerBtn" value=" CREATE PROFILE " class="wood-btn">
+                </form>
+                
+                <button onclick="window.location.href='loginmenu.php'" class="wood-btn">BACK TO LOGIN</button>
+            </center>
+        </div>
+
+        <br><br>
+        <marquee width="70%" scrollamount="20" bgcolor="black">
+            <font color="yellow" size="5">
+                🎰 EDUCATIONAL SIMULATOR • PLAY MONEY ONLY • LEARN ABOUT PROBABILITY 🎰
+            </font>
+        </marquee>
+    </center>
 </body>
 </html>

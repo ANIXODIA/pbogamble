@@ -1,0 +1,296 @@
+@import url('https://fonts.cdnfonts.com/css/minecraft-4');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Minecraft', sans-serif;
+    color: white;
+    min-height: 100vh;
+    background-color: #6A4B3A;
+    background-image:
+        linear-gradient(
+            45deg,
+            #5C4033 25%,
+            transparent 25%,
+            transparent 75%,
+            #5C4033 75%,
+            #5C4033
+        ),
+        linear-gradient(
+            45deg,
+            #5C4033 25%,
+            transparent 25%,
+            transparent 75%,
+            #5C4033 75%,
+            #5C4033
+        );
+    background-size: 64px 64px;
+    background-position: 0 0, 32px 32px;
+    background-attachment: fixed;
+}
+
+.dashboard {
+    position: relative;
+    background:
+        linear-gradient(
+            to bottom,
+            #5fd14f 0%,
+            #5fd14f 18%,
+            #4caf40 18%,
+            #4caf40 100%
+        );
+    border-top: 8px solid #7cff6b;
+    border-bottom: 14px solid #5b3b20;
+    padding: 22px 25px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    box-shadow:
+        inset 0 -8px 0 rgba(0,0,0,0.25),
+        0 8px 0 rgba(0,0,0,0.35);
+    image-rendering: pixelated;
+}
+
+
+.dashboard-title {
+    font-family: 'Minecraft', sans-serif;
+    font-size: 28px;
+    color: #ffffff;
+    text-shadow:
+        4px 4px 0px #2b2b2b,
+        0px 0px 8px rgba(255,255,255,0.15);
+    letter-spacing: 2px;
+}
+
+.dashboard-user {
+    color: #ffff99;
+    font-size: 16px;
+    margin-right: 20px;
+    font-family: 'Minecraft', sans-serif;
+}
+
+.dashboard-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.dashboard-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    background-color: #5c4033;
+    border-top: 4px solid #9b6b3a;
+    border-left: 4px solid #9b6b3a;
+    border-right: 4px solid #3d2a1d;
+    border-bottom: 4px solid #3d2a1d;
+    font-family: 'Minecraft', sans-serif;
+    transition: transform 0.1s;
+}
+
+.dashboard-nav a:hover {
+    transform: scale(1.05);
+    background-color: #8b5a2b;
+    color: #ffff99;
+}
+
+.dashboard-nav a.logout {
+    background-color: #c0392b;
+}
+
+h1 {
+    font-family: 'Minecraft', sans-serif;
+    font-size: 52px;
+    color: #ffffff;
+    text-shadow:
+        5px 5px 0px #2b2b2b,
+        0px 0px 10px rgba(255,255,255,0.15);
+    letter-spacing: 3px;
+    margin: 20px 0;
+}
+
+h2 {
+    font-family: 'Minecraft', sans-serif;
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+h3 {
+    font-family: 'Minecraft', sans-serif;
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.stone-box {
+    background-color: rgba(128, 128, 128, 0.95);
+    border-top: 10px solid #b5b5b5;
+    border-left: 10px solid #9a9a9a;
+    border-right: 10px solid #4a4a4a;
+    border-bottom: 10px solid #3a3a3a;
+    width: 550px;
+    padding: 40px;
+    box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.grass-btn, .wood-btn, .red-btn, .back-btn {
+    font-family: 'Minecraft', sans-serif;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.grass-btn:hover, .wood-btn:hover, .red-btn:hover, .back-btn:hover {
+    transform: scale(1.05);
+}
+
+.grass-btn:active, .wood-btn:active, .red-btn:active, .back-btn:active {
+    transform: scale(0.95);
+}
+
+.grass-btn {
+    background-color: #4CBB17;
+    color: white;
+    font-size: 22px;
+    border-top: 5px solid #7cff6b;
+    border-left: 5px solid #5fd14f;
+    border-right: 5px solid #2e6e17;
+    border-bottom: 5px solid #1d4710;
+    padding: 12px 20px;
+}
+
+.wood-btn {
+    background-color: #8B5A2B;
+    color: white;
+    font-size: 20px;
+    border-top: 5px solid #b8793d;
+    border-left: 5px solid #a96a2f;
+    border-right: 5px solid #5c4033;
+    border-bottom: 5px solid #3d2a1d;
+    padding: 12px 20px;
+    margin-top: 15px;
+}
+
+.red-btn {
+    background-color: #d32f2f;
+    color: white;
+    font-size: 24px;
+    border-top: 5px solid #ff6659;
+    border-left: 5px solid #ff6659;
+    border-right: 5px solid #8e0000;
+    border-bottom: 5px solid #8e0000;
+    padding: 12px 24px;
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+    font-family: 'Minecraft', sans-serif;
+    background-color: #d0d0d0;
+    border-top: 4px solid #ffffff;
+    border-left: 4px solid #f0f0f0;
+    border-right: 4px solid #555555;
+    border-bottom: 4px solid #444444;
+    text-align: center;
+    color: black;
+}
+
+input[type="text"], input[type="password"] {
+    width: 300px;
+    height: 48px;
+    font-size: 18px;
+}
+
+input[type="number"] {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+}
+
+#gamebox {
+    background-color: #7a7a7a;
+    width: 550px;
+    border-top: 8px solid #b0b0b0;
+    border-left: 8px solid #9a9a9a;
+    border-right: 8px solid #4a4a4a;
+    border-bottom: 8px solid #3a3a3a;
+    padding: 30px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.slot-window {
+    background-color: black;
+    color: white;
+    font-size: 60px;
+    padding: 20px;
+    border-top: 5px solid #ffffff;
+    border-left: 5px solid #dddddd;
+    border-right: 5px solid #555555;
+    border-bottom: 5px solid #333333;
+    display: inline-block;
+    margin: 5px;
+}
+.spinning-anim {
+    animation: shake 0.1s infinite;
+    color: yellow;
+}
+
+@keyframes shake {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(15px); }
+}
+
+.winner-anim {
+    animation: flash 0.3s infinite;
+}
+
+@keyframes flash {
+    0% {background-color: black;}
+    50% {background-color: lime; color: black;}
+    100% {background-color: black;}
+}
+
+table {
+    background-color: white;
+    color: black;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: 'Minecraft', sans-serif;
+}
+
+table td {
+    padding: 12px;
+    border: 3px solid #777;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 24px;
+    font-family: 'Minecraft', sans-serif;
+    margin: 20px 0;
+}
+
+.success-message {
+    color: #51cf66;
+    font-size: 24px;
+    font-family: 'Minecraft', sans-serif;
+    margin: 20px 0;
+}
+
+.disclaimer {
+    width: 70%;
+    margin: 0 auto;
+    color: #ffff99;
+    font-size: 26px;
+    padding: 15px;
+    border: 4px dashed yellow;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+marquee {
+    font-family: 'Minecraft', sans-serif;
+    padding: 10px;
+}
