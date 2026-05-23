@@ -1,8 +1,8 @@
 <?php
-// Dashboard/Header component for all pages
-// Include this file at the top of your page after session_start()
 
-// Determine page type for styling
+
+
+
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
@@ -13,7 +13,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     
     <div class="dashboard-nav">
         <?php
-        // Show different navigation based on login state
+        
         if (isset($_SESSION["user"])):
         ?>
             <span class="dashboard-user">
